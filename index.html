@@ -146,6 +146,69 @@
     .mon-wrap{width:46px;height:46px}
     .mon{width:33px}
   }
+
+  /* ===== DEPOIMENTOS ===== */
+  .depo{padding:8px 20px 10px}
+  .depo-div{
+    height:3px;border:none;margin:4px 0 20px;border-radius:99px;
+    background:repeating-linear-gradient(90deg,#EEDBFA 0 10px,transparent 10px 18px);
+  }
+  .depo-top{text-align:center;margin-bottom:16px}
+  .depo-top h2{font-family:'Baloo 2',cursive;font-weight:800;font-size:21px;color:var(--roxo)}
+  .depo-top p{font-size:13.5px;color:#8B6B83;margin-top:5px;font-weight:500;line-height:1.45}
+
+  .depo-form{
+    background:linear-gradient(160deg,#FBF4FF 0%,#FFF3FA 100%);
+    border:3px solid #EEDBFA;border-radius:24px;padding:16px;
+    display:flex;flex-direction:column;gap:12px;
+  }
+  .depo-campo{display:flex;flex-direction:column;gap:6px}
+  .depo-campo label{font-family:'Baloo 2',cursive;font-weight:700;font-size:13px;color:var(--roxo-esc)}
+  .depo-form input,.depo-form textarea{
+    width:100%;font-family:'Fredoka',sans-serif;font-size:14.5px;color:var(--texto);
+    border:2px solid #E6D3F2;border-radius:14px;padding:11px 13px;background:#fff;
+    transition:border-color .16s ease,box-shadow .16s ease;resize:vertical;
+  }
+  .depo-form input::placeholder,.depo-form textarea::placeholder{color:#C3A9BE}
+  .depo-form input:focus,.depo-form textarea:focus{
+    outline:none;border-color:var(--roxo);box-shadow:0 0 0 3px rgba(122,63,242,.15);
+  }
+  .depo-form textarea{min-height:78px;line-height:1.45}
+  .depo-btn{
+    border:none;cursor:pointer;font-family:'Baloo 2',cursive;font-weight:800;font-size:15.5px;color:#fff;
+    background:linear-gradient(150deg,var(--roxo) 0%,var(--roxo-esc) 100%);
+    padding:13px 18px;border-radius:16px;box-shadow:0 5px 0 var(--roxo-esc);
+    transition:transform .14s ease,box-shadow .14s ease;
+  }
+  .depo-btn:hover{transform:translateY(-2px);box-shadow:0 7px 0 var(--roxo-esc)}
+  .depo-btn:active{transform:translateY(0);box-shadow:0 3px 0 var(--roxo-esc)}
+  .depo-btn:disabled{opacity:.6;cursor:default}
+  .depo-msg{font-size:13px;font-weight:600;text-align:center;min-height:16px;transition:opacity .2s}
+  .depo-msg.ok{color:#2E9E5B}
+  .depo-msg.err{color:var(--rosa)}
+  .depo-modo{font-size:11.5px;color:#A98BA4;text-align:center;line-height:1.4;margin-top:-2px}
+
+  .depo-lista{margin-top:20px;display:flex;flex-direction:column;gap:13px}
+  .depo-item{
+    background:#fff;border:3px solid #F2E4F5;border-radius:20px;padding:14px 15px 13px;
+    position:relative;animation:depoIn .35s ease both;
+  }
+  @keyframes depoIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .depo-item::after{
+    content:"\201D";position:absolute;top:2px;right:14px;
+    font-family:'Luckiest Guy',cursive;font-size:40px;color:#FFE6A6;line-height:1;
+  }
+  .depo-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+  .depo-avatar{
+    width:38px;height:38px;flex-shrink:0;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Baloo 2',cursive;font-weight:800;font-size:17px;color:#fff;
+    box-shadow:0 3px 0 rgba(0,0,0,.12);
+  }
+  .depo-nome{font-family:'Baloo 2',cursive;font-weight:700;font-size:15px;color:var(--texto);line-height:1.1}
+  .depo-data{font-size:11.5px;color:#B79AB0;font-weight:500}
+  .depo-texto{font-size:14px;line-height:1.55;color:#5C4457;white-space:pre-wrap;word-break:break-word;padding-right:8px}
+  .depo-vazio{text-align:center;font-size:13.5px;color:#B79AB0;padding:16px 8px;font-weight:500}
 </style>
 </head>
 <body>
@@ -368,10 +431,177 @@
       </a>
     </nav>
 
+    <section class="depo">
+      <hr class="depo-div">
+      <div class="depo-top">
+        <h2>💬 Depoimentos</h2>
+        <p>Conte pra gente como foi a experiência do seu pequeno 💜</p>
+      </div>
+
+      <div class="depo-form">
+        <div class="depo-campo">
+          <label for="depo-nome">Seu nome</label>
+          <input id="depo-nome" type="text" maxlength="40" placeholder="Ex.: Ana, mãe do Théo" autocomplete="name">
+        </div>
+        <div class="depo-campo">
+          <label for="depo-texto">Seu depoimento</label>
+          <textarea id="depo-texto" maxlength="400" placeholder="Escreva aqui seu comentário..."></textarea>
+        </div>
+        <button class="depo-btn" id="depo-enviar" type="button">Enviar depoimento 🚀</button>
+        <div class="depo-msg" id="depo-msg"></div>
+        <div class="depo-modo" id="depo-modo"></div>
+      </div>
+
+      <div class="depo-lista" id="depo-lista"></div>
+    </section>
+
     <div class="rodape">
       <div class="dica">💜 Atendimento acolhedor para toda a criançada</div>
       <div class="marca">Laboratório <b>Fleming</b> · Fleming Kids</div>
     </div>
   </main>
+
+  <script>
+  (function(){
+    /* ========================================================================
+       CONFIGURAÇÃO DO BANCO DE DADOS (para TODOS verem os depoimentos)
+       ------------------------------------------------------------------------
+       Enquanto os 2 campos abaixo estiverem VAZIOS, funciona em MODO
+       DEMONSTRAÇÃO: os depoimentos ficam salvos só neste aparelho.
+
+       Para que todos os visitantes vejam os mesmos depoimentos, crie um
+       projeto GRATUITO no Supabase e cole aqui os 2 dados (passo a passo
+       enviado junto com este arquivo).
+    ======================================================================== */
+    const SUPABASE_URL      = "https://aurropcwcuvyrcwmicog.supabase.co";   // ex.: https://abcdefgh.supabase.co
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF1cnJvcGN3Y3V2eXJjd21pY29nIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM2MDIwNjcsImV4cCI6MjA5OTE3ODA2N30.3u7Wf3v7OcV8qF4i7GMtLGYREUVYrOsZE6XXnFM-eFQ";   // a chave "anon public"
+    /* ===================================================================== */
+
+    const usaNuvem = !!(SUPABASE_URL && SUPABASE_ANON_KEY);
+    const TABELA = "depoimentos";
+    const CORES = ["#D6004E","#7A3FF2","#4EC7F0","#7ED957","#FF9F45","#B57BFF","#FF8FB1","#FFC93C"];
+
+    const $nome  = document.getElementById("depo-nome");
+    const $texto = document.getElementById("depo-texto");
+    const $btn   = document.getElementById("depo-enviar");
+    const $msg   = document.getElementById("depo-msg");
+    const $modo  = document.getElementById("depo-modo");
+    const $lista = document.getElementById("depo-lista");
+
+    if(!usaNuvem){
+      $modo.textContent = "⚙️ Modo demonstração: os depoimentos ficam salvos só neste aparelho.";
+    }
+
+    function corDoNome(nome){
+      let h = 0;
+      for(let i=0;i<nome.length;i++){ h = nome.charCodeAt(i) + ((h<<5)-h); }
+      return CORES[Math.abs(h) % CORES.length];
+    }
+    function inicial(nome){ const n=(nome||"").trim(); return n ? n[0].toUpperCase() : "?"; }
+    function formatarData(iso){
+      try{
+        return new Date(iso).toLocaleDateString("pt-BR",{day:"2-digit",month:"short",year:"numeric"});
+      }catch(e){ return ""; }
+    }
+    function mostrarMsg(txt,tipo){ $msg.textContent = txt; $msg.className = "depo-msg " + (tipo||""); }
+
+    // Monta os cards usando textContent (nunca innerHTML com dados do usuário) -> seguro
+    function renderizar(itens){
+      $lista.innerHTML = "";
+      if(!itens || !itens.length){
+        const v = document.createElement("div");
+        v.className = "depo-vazio";
+        v.textContent = "Seja a primeira pessoa a deixar um depoimento 💜";
+        $lista.appendChild(v);
+        return;
+      }
+      itens.forEach(function(item){
+        const card = document.createElement("div"); card.className = "depo-item";
+
+        const head = document.createElement("div"); head.className = "depo-head";
+        const av = document.createElement("div"); av.className = "depo-avatar";
+        av.style.background = corDoNome(item.nome || "?");
+        av.textContent = inicial(item.nome);
+
+        const info = document.createElement("div");
+        const nome = document.createElement("div"); nome.className = "depo-nome";
+        nome.textContent = item.nome || "Anônimo";
+        const data = document.createElement("div"); data.className = "depo-data";
+        data.textContent = item.criado_em ? formatarData(item.criado_em) : "";
+        info.appendChild(nome); info.appendChild(data);
+
+        head.appendChild(av); head.appendChild(info);
+
+        const txt = document.createElement("div"); txt.className = "depo-texto";
+        txt.textContent = item.texto || "";
+
+        card.appendChild(head); card.appendChild(txt);
+        $lista.appendChild(card);
+      });
+    }
+
+    /* ---- Modo nuvem (Supabase, via API REST — não precisa de biblioteca) ---- */
+    async function carregarNuvem(){
+      const url = SUPABASE_URL + "/rest/v1/" + TABELA + "?select=*&order=criado_em.desc";
+      const r = await fetch(url,{headers:{apikey:SUPABASE_ANON_KEY,Authorization:"Bearer "+SUPABASE_ANON_KEY}});
+      if(!r.ok) throw new Error("load");
+      return await r.json();
+    }
+    async function salvarNuvem(nome,texto){
+      const r = await fetch(SUPABASE_URL + "/rest/v1/" + TABELA,{
+        method:"POST",
+        headers:{
+          apikey:SUPABASE_ANON_KEY,
+          Authorization:"Bearer "+SUPABASE_ANON_KEY,
+          "Content-Type":"application/json",
+          Prefer:"return=minimal"
+        },
+        body:JSON.stringify({nome:nome,texto:texto})
+      });
+      if(!r.ok) throw new Error("save");
+    }
+
+    /* ---- Modo local (demonstração — só neste aparelho) ---- */
+    const CHAVE = "flemingkids_depoimentos";
+    function carregarLocal(){ try{ return JSON.parse(localStorage.getItem(CHAVE)) || []; }catch(e){ return []; } }
+    function salvarLocal(nome,texto){
+      const itens = carregarLocal();
+      itens.unshift({nome:nome,texto:texto,criado_em:new Date().toISOString()});
+      localStorage.setItem(CHAVE,JSON.stringify(itens));
+    }
+
+    async function carregar(){
+      try{
+        renderizar(usaNuvem ? await carregarNuvem() : carregarLocal());
+      }catch(e){
+        renderizar(carregarLocal());
+        mostrarMsg("Não consegui carregar da nuvem agora.","err");
+      }
+    }
+
+    async function enviar(){
+      const nome  = $nome.value.trim();
+      const texto = $texto.value.trim();
+      if(nome.length < 2){ mostrarMsg("Por favor, escreva seu nome 🙂","err"); $nome.focus(); return; }
+      if(texto.length < 3){ mostrarMsg("Escreva um comentário para enviar 💬","err"); $texto.focus(); return; }
+
+      $btn.disabled = true; mostrarMsg("Enviando...","");
+      try{
+        if(usaNuvem){ await salvarNuvem(nome,texto); } else { salvarLocal(nome,texto); }
+        $nome.value = ""; $texto.value = "";
+        mostrarMsg("Depoimento enviado. Muito obrigado! 💜","ok");
+        await carregar();
+        setTimeout(function(){ if($msg.classList.contains("ok")) mostrarMsg("",""); }, 4000);
+      }catch(e){
+        mostrarMsg("Ops, não consegui enviar agora. Tente novamente.","err");
+      }finally{
+        $btn.disabled = false;
+      }
+    }
+
+    $btn.addEventListener("click", enviar);
+    carregar();
+  })();
+  </script>
 </body>
 </html>
