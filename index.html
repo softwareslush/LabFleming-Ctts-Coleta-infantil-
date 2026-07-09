@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fleming Kids | Agende a Coleta Infantil</title>
+<meta name="description" content="Fleming Kids - Coleta infantil com carinho. Escolha a unidade mais pertinho e agende pelo WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Fredoka:wght@400;500;600;700&family=Luckiest+Guy&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --rosa:#D6004E;
+    --rosa-esc:#A80038;
+    --roxo:#7A3FF2;
+    --roxo-esc:#5E27CC;
+    --amarelo:#FFC93C;
+    --branco:#FFFFFF;
+    --texto:#4A2140;
+    --wpp:#25D366;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{overflow-x:hidden}
+  body{
+    font-family:'Fredoka',sans-serif;
+    background:
+      radial-gradient(circle at 12% 8%, rgba(122,63,242,.16), transparent 42%),
+      radial-gradient(circle at 88% 12%, rgba(255,201,60,.20), transparent 40%),
+      radial-gradient(circle at 50% 100%, rgba(78,199,240,.16), transparent 45%),
+      linear-gradient(160deg,#FFE9F2 0%,#FDF3FF 55%,#EAF7FF 100%);
+    min-height:100vh;
+    display:flex;align-items:center;justify-content:center;
+    padding:22px 14px 40px;
+    color:var(--texto);
+    -webkit-font-smoothing:antialiased;
+  }
+  .blob{position:fixed;border-radius:50%;filter:blur(1px);opacity:.5;z-index:0;pointer-events:none}
+  .b1{width:70px;height:70px;background:var(--amarelo);top:8%;left:6%;animation:float 6s ease-in-out infinite}
+  .b2{width:46px;height:46px;background:var(--roxo);top:22%;right:8%;animation:float 5s ease-in-out infinite .6s}
+  .b3{width:38px;height:38px;background:#4EC7F0;bottom:14%;left:10%;animation:float 7s ease-in-out infinite .3s}
+  .b4{width:56px;height:56px;background:#7ED957;bottom:8%;right:12%;animation:float 6.5s ease-in-out infinite .9s}
+  @keyframes float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-18px) rotate(8deg)}}
+
+  .card{
+    position:relative;z-index:1;
+    width:100%;max-width:500px;
+    background:var(--branco);
+    border:5px solid var(--roxo);
+    border-radius:32px;
+    box-shadow:0 22px 45px rgba(122,63,242,.28);
+    overflow:hidden;
+  }
+  /* HERO com tipografia + monstro */
+  .hero{
+    position:relative;
+    background:
+      radial-gradient(circle at 80% 20%, #E11A5C 0%, transparent 55%),
+      linear-gradient(150deg,#E4005A 0%,#B00043 100%);
+    padding:24px 22px 30px;
+    display:flex;align-items:center;gap:12px;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;
+    background-image:radial-gradient(rgba(255,255,255,.13) 2px, transparent 2px);
+    background-size:22px 22px;opacity:.6;
+  }
+  .hero-mon{
+    position:relative;z-index:1;
+    width:118px;height:auto;flex-shrink:0;
+    animation:bob 4.5s ease-in-out infinite;
+    filter:drop-shadow(0 6px 8px rgba(0,0,0,.25));
+  }
+  @keyframes bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-10px) rotate(2deg)}}
+  .hero-txt{position:relative;z-index:1;flex:1;text-align:left}
+  .hero-txt .kids{
+    font-family:'Luckiest Guy',cursive;
+    font-size:40px;line-height:.9;
+    color:#fff;letter-spacing:1px;
+    text-shadow:
+      3px 3px 0 var(--roxo-esc),
+      -2px -2px 0 var(--roxo-esc),
+      2px -2px 0 var(--roxo-esc),
+      -2px 2px 0 var(--roxo-esc),
+      5px 6px 0 rgba(0,0,0,.18);
+    transform:rotate(-3deg);
+  }
+  .hero-txt .kids b{display:block;font-weight:400}
+  .hero-txt .sub{
+    margin-top:12px;
+    display:inline-block;
+    font-family:'Baloo 2',cursive;font-weight:700;
+    font-size:16px;color:#fff;
+    background:rgba(0,0,0,.16);
+    padding:5px 14px;border-radius:999px;
+    transform:rotate(-2deg);
+  }
+  .hero::after{
+    content:"";position:absolute;left:0;right:0;bottom:-2px;height:24px;z-index:1;
+    background:radial-gradient(circle at 12px -4px, transparent 12px, var(--branco) 13px) repeat-x;
+    background-size:24px 24px;
+  }
+
+  .intro{padding:24px 24px 6px;text-align:center}
+  .intro h1{font-family:'Baloo 2',cursive;font-weight:800;font-size:22px;color:var(--rosa);line-height:1.15}
+  .intro p{margin-top:8px;font-size:15px;font-weight:500;color:#6B4B63;line-height:1.5}
+  .chip{
+    display:inline-flex;align-items:center;gap:7px;margin-top:14px;
+    background:var(--amarelo);color:#7A4B00;
+    font-family:'Baloo 2',cursive;font-weight:700;font-size:13px;
+    padding:8px 16px;border-radius:999px;box-shadow:0 4px 0 #E0A800;
+  }
+
+  .lista{padding:18px 18px 6px;display:flex;flex-direction:column;gap:12px}
+  .card-u{
+    display:flex;align-items:center;gap:13px;padding:12px 14px;
+    background:#fff;border:3px solid #F2E4F5;border-radius:22px;
+    text-decoration:none;color:var(--texto);
+    transition:transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+  }
+  .card-u:hover{border-color:var(--c);transform:translateY(-3px) rotate(-.6deg);box-shadow:0 12px 22px rgba(0,0,0,.12)}
+  .card-u:active{transform:translateY(0)}
+  .mon-wrap{flex-shrink:0;width:52px;height:52px;background:color-mix(in srgb, var(--c) 18%, #fff);border-radius:16px;display:flex;align-items:center;justify-content:center}
+  .mon{width:38px;height:auto;animation:wiggle 4s ease-in-out infinite}
+  .card-u:nth-child(even) .mon{animation-delay:.5s}
+  .card-u:hover .mon{animation:hop .5s ease}
+  @keyframes wiggle{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+  @keyframes hop{0%,100%{transform:translateY(0)}40%{transform:translateY(-8px) scale(1.08)}}
+  .u-info{flex:1;display:flex;flex-direction:column;min-width:0}
+  .u-nome{font-family:'Baloo 2',cursive;font-weight:700;font-size:17px;color:var(--texto)}
+  .u-num{font-size:13.5px;font-weight:500;color:#9A7E93;margin-top:-1px}
+  .u-go{flex-shrink:0;width:44px;height:44px;border-radius:14px;background:var(--wpp);display:flex;align-items:center;justify-content:center;box-shadow:0 5px 0 #1EA956;transition:transform .16s ease, box-shadow .16s ease}
+  .card-u:hover .u-go{transform:translateY(-2px);box-shadow:0 7px 0 #1EA956}
+
+  .rodape{padding:16px 24px 26px;text-align:center}
+  .rodape .dica{font-size:13.5px;font-weight:500;color:#8B6B83;display:flex;align-items:center;justify-content:center;gap:8px}
+  .rodape .marca{margin-top:12px;font-family:'Baloo 2',cursive;font-weight:700;font-size:13px;color:#B79AB0;letter-spacing:.4px}
+  .rodape .marca b{color:var(--rosa)}
+  @media (max-width:440px){
+    .hero{flex-direction:column;text-align:center;gap:6px;padding-top:20px}
+    .hero-txt{text-align:center}
+    .hero-txt .kids{font-size:34px}
+    .hero-mon{width:100px}
+    .intro h1{font-size:20px}
+    .u-nome{font-size:15.5px}
+    .mon-wrap{width:46px;height:46px}
+    .mon{width:33px}
+  }
+</style>
+</head>
+<body>
+  <span class="blob b1"></span><span class="blob b2"></span>
+  <span class="blob b3"></span><span class="blob b4"></span>
+
+  <main class="card">
+    <div class="hero">
+      <svg class="hero-mon" viewBox="0 0 150 175" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <!-- espinhos amarelos -->
+  <g fill="#FFC93C" stroke="#E0A800" stroke-width="2" stroke-linejoin="round">
+    <path d="M42 30 L36 8 L52 26 Z"/>
+    <path d="M58 24 L58 2 L70 22 Z"/>
+    <path d="M76 22 L84 3 L88 26 Z"/>
+    <path d="M94 26 L108 10 L102 32 Z"/>
+  </g>
+  <!-- pernas -->
+  <g stroke="#2b6fa0" stroke-width="3">
+    <line x1="56" y1="150" x2="50" y2="172" stroke-linecap="round"/>
+    <line x1="92" y1="150" x2="98" y2="172" stroke-linecap="round"/>
+  </g>
+  <circle cx="50" cy="172" r="6" fill="#3a92c9"/>
+  <circle cx="98" cy="172" r="6" fill="#3a92c9"/>
+  <!-- braços -->
+  <path d="M28 92 Q10 100 8 120" stroke="#3a92c9" stroke-width="11" fill="none" stroke-linecap="round"/>
+  <path d="M122 92 Q140 96 142 118" stroke="#3a92c9" stroke-width="11" fill="none" stroke-linecap="round"/>
+  <!-- corpo -->
+  <path d="M28 78 Q28 34 75 34 Q122 34 122 78 L122 128 Q122 152 96 152 L54 152 Q28 152 28 128 Z" fill="#4EC7F0"/>
+  <ellipse cx="75" cy="150" rx="40" ry="8" fill="#3aaede" opacity=".5"/>
+  <!-- olhos -->
+  <g>
+    <circle cx="52" cy="74" r="17" fill="#fff"/><circle cx="52" cy="77" r="8.5" fill="#5CB85C"/><circle cx="52" cy="77" r="4" fill="#1b1b1b"/><circle cx="48" cy="72" r="3" fill="#fff"/>
+    <circle cx="88" cy="60" r="15" fill="#fff"/><circle cx="88" cy="63" r="7.5" fill="#5CB85C"/><circle cx="88" cy="63" r="3.5" fill="#1b1b1b"/><circle cx="85" cy="58" r="2.6" fill="#fff"/>
+    <circle cx="104" cy="86" r="12" fill="#fff"/><circle cx="104" cy="88" r="6" fill="#5CB85C"/><circle cx="104" cy="88" r="2.8" fill="#1b1b1b"/><circle cx="101" cy="84" r="2.2" fill="#fff"/>
+  </g>
+  <!-- boca -->
+  <path d="M48 108 Q68 132 96 112 Q90 124 72 126 Q56 126 48 108 Z" fill="#7A1030"/>
+  <path d="M54 110 L58 118 L62 110 Z" fill="#fff"/>
+  <path d="M84 111 L88 119 L92 110 Z" fill="#fff"/>
+  <!-- bochecha -->
+  <circle cx="40" cy="98" r="6" fill="#fff" opacity=".28"/>
+</svg>
+      <div class="hero-txt">
+        <div class="kids">FLEMING<b>KIDS</b></div>
+        <span class="sub">Coleta infantil</span>
+      </div>
+    </div>
+
+    <div class="intro">
+      <h1>Vamos agendar a coleta do seu pequeno? 🧸</h1>
+      <p>Coleta infantil feita com muito carinho e paciência. Escolha a unidade mais pertinho de você e fale com a gente no WhatsApp.</p>
+      <span class="chip">👇 É só tocar na sua cidade</span>
+    </div>
+
+    <nav class="lista">
+      <a class="card-u" href="https://wa.me/5561993723628?text=Ol%C3%A1%21%20Gostaria%20de%20agendar%20uma%20coleta%20infantil%20no%20Fleming%20Kids.%20Pode%20me%20ajudar%3F" target="_blank" rel="noopener" style="--c:#4EC7F0">
+        <span class="mon-wrap"><svg class="mon" viewBox="0 0 40 44" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6 20 Q6 6 20 6 Q34 6 34 20 L34 34 Q34 40 28 40 L27 44 L24 40 L16 40 L13 44 L12 40 Q6 40 6 34 Z" fill="#4EC7F0"/>
+      <circle cx="20" cy="18" r="8" fill="#fff"/><circle cx="20" cy="19" r="4" fill="#2b2b2b"/><circle cx="18" cy="17" r="1.4" fill="#fff"/>
+      <path d="M14 30 Q20 35 26 30" stroke="#2b2b2b" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+      <circle cx="11" cy="26" r="2.5" fill="#fff" opacity=".35"/>
+    </svg></span>
+        <span class="u-info">
+          <span class="u-nome">Asa Sul</span>
+          <span class="u-num">(61) 9 9372-3628</span>
+        </span>
+        <span class="u-go">
+          <svg viewBox="0 0 32 32" width="26" height="26"><path fill="#fff" d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.6 6L4 29l8.2-1.6c1.7.9 3.7 1.4 5.6 1.4C24.6 28.8 30 23.4 30 16.8 30 9.9 24.6 4.5 18 4.5 17.3 4.5 16 3 16 3zm.2 3.5c5.3 0 9.6 4.3 9.6 9.6s-4.3 9.6-9.6 9.6c-1.7 0-3.4-.5-4.9-1.3l-.4-.2-3.5.7.7-3.4-.2-.4c-.9-1.5-1.4-3.2-1.4-5 0-5.3 4.3-9.9 9.6-9.9zm-4.5 5.2c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.4 5.2 4.6 2.6 1 3.1.8 3.7.8.6-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.3-.2-.3 0-.5.1-.7.1-.1.3-.4.5-.6.1-.2.2-.3.3-.5.1-.2 0-.4 0-.6-.1-.2-.7-1.7-.9-2.3-.2-.6-.5-.5-.7-.5h-.6z"/></svg>
+        </span>
+      </a>
+      <a class="card-u" href="https://wa.me/5561994296303?text=Ol%C3%A1%21%20Gostaria%20de%20agendar%20uma%20coleta%20infantil%20no%20Fleming%20Kids.%20Pode%20me%20ajudar%3F" target="_blank" rel="noopener" style="--c:#FFC93C">
+        <span class="mon-wrap"><svg class="mon" viewBox="0 0 40 44" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6 20 Q6 6 20 6 Q34 6 34 20 L34 34 Q34 40 28 40 L27 44 L24 40 L16 40 L13 44 L12 40 Q6 40 6 34 Z" fill="#FFC93C"/>
+      <circle cx="14" cy="17" r="6" fill="#fff"/><circle cx="14" cy="18" r="3" fill="#2b2b2b"/><circle cx="26" cy="17" r="6" fill="#fff"/><circle cx="26" cy="18" r="3" fill="#2b2b2b"/>
+      <path d="M14 30 Q20 35 26 30" stroke="#2b2b2b" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+      <circle cx="11" cy="26" r="2.5" fill="#fff" opacity=".35"/>
+    </svg></span>
+        <span class="u-info">
+          <span class="u-nome">Ceilândia Sul</span>
+          <span class="u-num">(61) 9 9429-6303</span>
+        </span>
+        <span class="u-go">
+          <svg viewBox="0 0 32 32" width="26" height="26"><path fill="#fff" d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.6 6L4 29l8.2-1.6c1.7.9 3.7 1.4 5.6 1.4C24.6 28.8 30 23.4 30 16.8 30 9.9 24.6 4.5 18 4.5 17.3 4.5 16 3 16 3zm.2 3.5c5.3 0 9.6 4.3 9.6 9.6s-4.3 9.6-9.6 9.6c-1.7 0-3.4-.5-4.9-1.3l-.4-.2-3.5.7.7-3.4-.2-.4c-.9-1.5-1.4-3.2-1.4-5 0-5.3 4.3-9.9 9.6-9.9zm-4.5 5.2c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.4 5.2 4.6 2.6 1 3.1.8 3.7.8.6-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.3-.2-.3 0-.5.1-.7.1-.1.3-.4.5-.6.1-.2.2-.3.3-.5.1-.2 0-.4 0-.6-.1-.2-.7-1.7-.9-2.3-.2-.6-.5-.5-.7-.5h-.6z"/></svg>
+        </span>
+      </a>
+      <a class="card-u" href="https://wa.me/5561984162823?text=Ol%C3%A1%21%20Gostaria%20de%20agendar%20uma%20coleta%20infantil%20no%20Fleming%20Kids.%20Pode%20me%20ajudar%3F" target="_blank" rel="noopener" style="--c:#7ED957">
+        <span class="mon-wrap"><svg class="mon" viewBox="0 0 40 44" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6 20 Q6 6 20 6 Q34 6 34 20 L34 34 Q34 40 28 40 L27 44 L24 40 L16 40 L13 44 L12 40 Q6 40 6 34 Z" fill="#7ED957"/>
+      <circle cx="12" cy="16" r="5" fill="#fff"/><circle cx="12" cy="17" r="2.5" fill="#2b2b2b"/><circle cx="20" cy="13" r="5" fill="#fff"/><circle cx="20" cy="14" r="2.5" fill="#2b2b2b"/><circle cx="28" cy="16" r="5" fill="#fff"/><circle cx="28" cy="17" r="2.5" fill="#2b2b2b"/>
+      <path d="M14 30 Q20 35 26 30" stroke="#2b2b2b" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+      <circle cx="11" cy="26" r="2.5" fill="#fff" opacity=".35"/>
+    </svg></span>
+        <span class="u-info">
+          <span class="u-nome">Gama</span>
+          <span class="u-num">(61) 9 8416-2823</span>
+        </span>
+        <span class="u-go">
+          <svg viewBox="0 0 32 32" width="26" height="26"><path fill="#fff" d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.6 6L4 29l8.2-1.6c1.7.9 3.7 1.4 5.6 1.4C24.6 28.8 30 23.4 30 16.8 30 9.9 24.6 4.5 18 4.5 17.3 4.5 16 3 16 3zm.2 3.5c5.3 0 9.6 4.3 9.6 9.6s-4.3 9.6-9.6 9.6c-1.7 0-3.4-.5-4.9-1.3l-.4-.2-3.5.7.7-3.4-.2-.4c-.9-1.5-1.4-3.2-1.4-5 0-5.3 4.3-9.9 9.6-9.9zm-4.5 5.2c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.4 5.2 4.6 2.6 1 3.1.8 3.7.8.6-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.3-.2-.3 0-.5.1-.7.1-.1.3-.4.5-.6.1-.2.2-.3.3-.5.1-.2 0-.4 0-.6-.1-.2-.7-1.7-.9-2.3-.2-.6-.5-.5-.7-.5h-.6z"/></svg>
+        </span>
+      </a>
+      <a class="card-u" href="https://wa.me/5561984696648?text=Ol%C3%A1%21%20Gostaria%20de%20agendar%20uma%20coleta%20infantil%20no%20Fleming%20Kids.%20Pode%20me%20ajudar%3F" target="_blank" rel="noopener" style="--c:#FF8FB1">
+        <span class="mon-wrap"><svg class="mon" viewBox="0 0 40 44" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6 20 Q6 6 20 6 Q34 6 34 20 L34 34 Q34 40 28 40 L27 44 L24 40 L16 40 L13 44 L12 40 Q6 40 6 34 Z" fill="#FF8FB1"/>
+      <circle cx="20" cy="18" r="8" fill="#fff"/><circle cx="20" cy="19" r="4" fill="#2b2b2b"/><circle cx="18" cy="17" r="1.4" fill="#fff"/>
+      <path d="M14 30 Q20 35 26 30" stroke="#2b2b2b" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+      <circle cx="11" cy="26" r="2.5" fill="#fff" opacity=".35"/>
+    </svg></span>
+        <span class="u-info">
+          <span class="u-nome">Samambaia Sul</span>
+          <span class="u-num">(61) 9 8469-6648</span>
+        </span>
+        <span class="u-go">
+          <svg viewBox="0 0 32 32" width="26" height="26"><path fill="#fff" d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.6 6L4 29l8.2-1.6c1.7.9 3.7 1.4 5.6 1.4C24.6 28.8 30 23.4 30 16.8 30 9.9 24.6 4.5 18 4.5 17.3 4.5 16 3 16 3zm.2 3.5c5.3 0 9.6 4.3 9.6 9.6s-4.3 9.6-9.6 9.6c-1.7 0-3.4-.5-4.9-1.3l-.4-.2-3.5.7.7-3.4-.2-.4c-.9-1.5-1.4-3.2-1.4-5 0-5.3 4.3-9.9 9.6-9.9zm-4.5 5.2c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.4 5.2 4.6 2.6 1 3.1.8 3.7.8.6-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.3-.2-.3 0-.5.1-.7.1-.1.3-.4.5-.6.1-.2.2-.3.3-.5.1-.2 0-.4 0-.6-.1-.2-.7-1.7-.9-2.3-.2-.6-.5-.5-.7-.5h-.6z"/></svg>
+        </span>
+      </a>
+      <a class="card-u" href="https://wa.me/5561986698597?text=Ol%C3%A1%21%20Gostaria%20de%20agendar%20uma%20coleta%20infantil%20no%20Fleming%20Kids.%20Pode%20me%20ajudar%3F" target="_blank" rel="noopener" style="--c:#B57BFF">
+        <span class="mon-wrap"><svg class="mon" viewBox="0 0 40 44" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6 20 Q6 6 20 6 Q34 6 34 20 L34 34 Q34 40 28 40 L27 44 L24 40 L16 40 L13 44 L12 40 Q6 40 6 34 Z" fill="#B57BFF"/>
+      <circle cx="14" cy="17" r="6" fill="#fff"/><circle cx="14" cy="18" r="3" fill="#2b2b2b"/><circle cx="26" cy="17" r="6" fill="#fff"/><circle cx="26" cy="18" r="3" fill="#2b2b2b"/>
+      <path d="M14 30 Q20 35 26 30" stroke="#2b2b2b" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+      <circle cx="11" cy="26" r="2.5" fill="#fff" opacity=".35"/>
+    </svg></span>
+        <span class="u-info">
+          <span class="u-nome">Santa Maria</span>
+          <span class="u-num">(61) 9 8669-8597</span>
+        </span>
+        <span class="u-go">
+          <svg viewBox="0 0 32 32" width="26" height="26"><path fill="#fff" d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.6 6L4 29l8.2-1.6c1.7.9 3.7 1.4 5.6 1.4C24.6 28.8 30 23.4 30 16.8 30 9.9 24.6 4.5 18 4.5 17.3 4.5 16 3 16 3zm.2 3.5c5.3 0 9.6 4.3 9.6 9.6s-4.3 9.6-9.6 9.6c-1.7 0-3.4-.5-4.9-1.3l-.4-.2-3.5.7.7-3.4-.2-.4c-.9-1.5-1.4-3.2-1.4-5 0-5.3 4.3-9.9 9.6-9.9zm-4.5 5.2c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.4 5.2 4.6 2.6 1 3.1.8 3.7.8.6-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.3-.2-.3 0-.5.1-.7.1-.1.3-.4.5-.6.1-.2.2-.3.3-.5.1-.2 0-.4 0-.6-.1-.2-.7-1.7-.9-2.3-.2-.6-.5-.5-.7-.5h-.6z"/></svg>
+        </span>
+      </a>
+      <a class="card-u" href="https://wa.me/5561985562199?text=Ol%C3%A1%21%20Gostaria%20de%20agendar%20uma%20coleta%20infantil%20no%20Fleming%20Kids.%20Pode%20me%20ajudar%3F" target="_blank" rel="noopener" style="--c:#FF9F45">
+        <span class="mon-wrap"><svg class="mon" viewBox="0 0 40 44" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6 20 Q6 6 20 6 Q34 6 34 20 L34 34 Q34 40 28 40 L27 44 L24 40 L16 40 L13 44 L12 40 Q6 40 6 34 Z" fill="#FF9F45"/>
+      <circle cx="12" cy="16" r="5" fill="#fff"/><circle cx="12" cy="17" r="2.5" fill="#2b2b2b"/><circle cx="20" cy="13" r="5" fill="#fff"/><circle cx="20" cy="14" r="2.5" fill="#2b2b2b"/><circle cx="28" cy="16" r="5" fill="#fff"/><circle cx="28" cy="17" r="2.5" fill="#2b2b2b"/>
+      <path d="M14 30 Q20 35 26 30" stroke="#2b2b2b" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+      <circle cx="11" cy="26" r="2.5" fill="#fff" opacity=".35"/>
+    </svg></span>
+        <span class="u-info">
+          <span class="u-nome">São Sebastião</span>
+          <span class="u-num">(61) 9 8556-2199</span>
+        </span>
+        <span class="u-go">
+          <svg viewBox="0 0 32 32" width="26" height="26"><path fill="#fff" d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.6 6L4 29l8.2-1.6c1.7.9 3.7 1.4 5.6 1.4C24.6 28.8 30 23.4 30 16.8 30 9.9 24.6 4.5 18 4.5 17.3 4.5 16 3 16 3zm.2 3.5c5.3 0 9.6 4.3 9.6 9.6s-4.3 9.6-9.6 9.6c-1.7 0-3.4-.5-4.9-1.3l-.4-.2-3.5.7.7-3.4-.2-.4c-.9-1.5-1.4-3.2-1.4-5 0-5.3 4.3-9.9 9.6-9.9zm-4.5 5.2c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.4 5.2 4.6 2.6 1 3.1.8 3.7.8.6-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.3-.2-.3 0-.5.1-.7.1-.1.3-.4.5-.6.1-.2.2-.3.3-.5.1-.2 0-.4 0-.6-.1-.2-.7-1.7-.9-2.3-.2-.6-.5-.5-.7-.5h-.6z"/></svg>
+        </span>
+      </a>
+      <a class="card-u" href="https://wa.me/5561981061662?text=Ol%C3%A1%21%20Gostaria%20de%20agendar%20uma%20coleta%20infantil%20no%20Fleming%20Kids.%20Pode%20me%20ajudar%3F" target="_blank" rel="noopener" style="--c:#4EC7F0">
+        <span class="mon-wrap"><svg class="mon" viewBox="0 0 40 44" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6 20 Q6 6 20 6 Q34 6 34 20 L34 34 Q34 40 28 40 L27 44 L24 40 L16 40 L13 44 L12 40 Q6 40 6 34 Z" fill="#4EC7F0"/>
+      <circle cx="20" cy="18" r="8" fill="#fff"/><circle cx="20" cy="19" r="4" fill="#2b2b2b"/><circle cx="18" cy="17" r="1.4" fill="#fff"/>
+      <path d="M14 30 Q20 35 26 30" stroke="#2b2b2b" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+      <circle cx="11" cy="26" r="2.5" fill="#fff" opacity=".35"/>
+    </svg></span>
+        <span class="u-info">
+          <span class="u-nome">Novo Gama - GO</span>
+          <span class="u-num">(61) 9 8106-1662</span>
+        </span>
+        <span class="u-go">
+          <svg viewBox="0 0 32 32" width="26" height="26"><path fill="#fff" d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.6 6L4 29l8.2-1.6c1.7.9 3.7 1.4 5.6 1.4C24.6 28.8 30 23.4 30 16.8 30 9.9 24.6 4.5 18 4.5 17.3 4.5 16 3 16 3zm.2 3.5c5.3 0 9.6 4.3 9.6 9.6s-4.3 9.6-9.6 9.6c-1.7 0-3.4-.5-4.9-1.3l-.4-.2-3.5.7.7-3.4-.2-.4c-.9-1.5-1.4-3.2-1.4-5 0-5.3 4.3-9.9 9.6-9.9zm-4.5 5.2c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.4 5.2 4.6 2.6 1 3.1.8 3.7.8.6-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.3-.2-.3 0-.5.1-.7.1-.1.3-.4.5-.6.1-.2.2-.3.3-.5.1-.2 0-.4 0-.6-.1-.2-.7-1.7-.9-2.3-.2-.6-.5-.5-.7-.5h-.6z"/></svg>
+        </span>
+      </a>
+      <a class="card-u" href="https://wa.me/5561984306315?text=Ol%C3%A1%21%20Gostaria%20de%20agendar%20uma%20coleta%20infantil%20no%20Fleming%20Kids.%20Pode%20me%20ajudar%3F" target="_blank" rel="noopener" style="--c:#7ED957">
+        <span class="mon-wrap"><svg class="mon" viewBox="0 0 40 44" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6 20 Q6 6 20 6 Q34 6 34 20 L34 34 Q34 40 28 40 L27 44 L24 40 L16 40 L13 44 L12 40 Q6 40 6 34 Z" fill="#7ED957"/>
+      <circle cx="14" cy="17" r="6" fill="#fff"/><circle cx="14" cy="18" r="3" fill="#2b2b2b"/><circle cx="26" cy="17" r="6" fill="#fff"/><circle cx="26" cy="18" r="3" fill="#2b2b2b"/>
+      <path d="M14 30 Q20 35 26 30" stroke="#2b2b2b" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+      <circle cx="11" cy="26" r="2.5" fill="#fff" opacity=".35"/>
+    </svg></span>
+        <span class="u-info">
+          <span class="u-nome">Lago Azul - GO</span>
+          <span class="u-num">(61) 9 8430-6315</span>
+        </span>
+        <span class="u-go">
+          <svg viewBox="0 0 32 32" width="26" height="26"><path fill="#fff" d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.6 6L4 29l8.2-1.6c1.7.9 3.7 1.4 5.6 1.4C24.6 28.8 30 23.4 30 16.8 30 9.9 24.6 4.5 18 4.5 17.3 4.5 16 3 16 3zm.2 3.5c5.3 0 9.6 4.3 9.6 9.6s-4.3 9.6-9.6 9.6c-1.7 0-3.4-.5-4.9-1.3l-.4-.2-3.5.7.7-3.4-.2-.4c-.9-1.5-1.4-3.2-1.4-5 0-5.3 4.3-9.9 9.6-9.9zm-4.5 5.2c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.4 5.2 4.6 2.6 1 3.1.8 3.7.8.6-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.3-.2-.3 0-.5.1-.7.1-.1.3-.4.5-.6.1-.2.2-.3.3-.5.1-.2 0-.4 0-.6-.1-.2-.7-1.7-.9-2.3-.2-.6-.5-.5-.7-.5h-.6z"/></svg>
+        </span>
+      </a>
+      <a class="card-u" href="https://wa.me/5561985059493?text=Ol%C3%A1%21%20Gostaria%20de%20agendar%20uma%20coleta%20infantil%20no%20Fleming%20Kids.%20Pode%20me%20ajudar%3F" target="_blank" rel="noopener" style="--c:#FFC93C">
+        <span class="mon-wrap"><svg class="mon" viewBox="0 0 40 44" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6 20 Q6 6 20 6 Q34 6 34 20 L34 34 Q34 40 28 40 L27 44 L24 40 L16 40 L13 44 L12 40 Q6 40 6 34 Z" fill="#FFC93C"/>
+      <circle cx="12" cy="16" r="5" fill="#fff"/><circle cx="12" cy="17" r="2.5" fill="#2b2b2b"/><circle cx="20" cy="13" r="5" fill="#fff"/><circle cx="20" cy="14" r="2.5" fill="#2b2b2b"/><circle cx="28" cy="16" r="5" fill="#fff"/><circle cx="28" cy="17" r="2.5" fill="#2b2b2b"/>
+      <path d="M14 30 Q20 35 26 30" stroke="#2b2b2b" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+      <circle cx="11" cy="26" r="2.5" fill="#fff" opacity=".35"/>
+    </svg></span>
+        <span class="u-info">
+          <span class="u-nome">Valparaíso 1</span>
+          <span class="u-num">(61) 9 8505-9493</span>
+        </span>
+        <span class="u-go">
+          <svg viewBox="0 0 32 32" width="26" height="26"><path fill="#fff" d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.6 6L4 29l8.2-1.6c1.7.9 3.7 1.4 5.6 1.4C24.6 28.8 30 23.4 30 16.8 30 9.9 24.6 4.5 18 4.5 17.3 4.5 16 3 16 3zm.2 3.5c5.3 0 9.6 4.3 9.6 9.6s-4.3 9.6-9.6 9.6c-1.7 0-3.4-.5-4.9-1.3l-.4-.2-3.5.7.7-3.4-.2-.4c-.9-1.5-1.4-3.2-1.4-5 0-5.3 4.3-9.9 9.6-9.9zm-4.5 5.2c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.4 5.2 4.6 2.6 1 3.1.8 3.7.8.6-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.3-.2-.3 0-.5.1-.7.1-.1.3-.4.5-.6.1-.2.2-.3.3-.5.1-.2 0-.4 0-.6-.1-.2-.7-1.7-.9-2.3-.2-.6-.5-.5-.7-.5h-.6z"/></svg>
+        </span>
+      </a>
+      <a class="card-u" href="https://wa.me/5561985563390?text=Ol%C3%A1%21%20Gostaria%20de%20agendar%20uma%20coleta%20infantil%20no%20Fleming%20Kids.%20Pode%20me%20ajudar%3F" target="_blank" rel="noopener" style="--c:#B57BFF">
+        <span class="mon-wrap"><svg class="mon" viewBox="0 0 40 44" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6 20 Q6 6 20 6 Q34 6 34 20 L34 34 Q34 40 28 40 L27 44 L24 40 L16 40 L13 44 L12 40 Q6 40 6 34 Z" fill="#B57BFF"/>
+      <circle cx="20" cy="18" r="8" fill="#fff"/><circle cx="20" cy="19" r="4" fill="#2b2b2b"/><circle cx="18" cy="17" r="1.4" fill="#fff"/>
+      <path d="M14 30 Q20 35 26 30" stroke="#2b2b2b" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+      <circle cx="11" cy="26" r="2.5" fill="#fff" opacity=".35"/>
+    </svg></span>
+        <span class="u-info">
+          <span class="u-nome">Valparaíso 2</span>
+          <span class="u-num">(61) 9 8556-3390</span>
+        </span>
+        <span class="u-go">
+          <svg viewBox="0 0 32 32" width="26" height="26"><path fill="#fff" d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.6 6L4 29l8.2-1.6c1.7.9 3.7 1.4 5.6 1.4C24.6 28.8 30 23.4 30 16.8 30 9.9 24.6 4.5 18 4.5 17.3 4.5 16 3 16 3zm.2 3.5c5.3 0 9.6 4.3 9.6 9.6s-4.3 9.6-9.6 9.6c-1.7 0-3.4-.5-4.9-1.3l-.4-.2-3.5.7.7-3.4-.2-.4c-.9-1.5-1.4-3.2-1.4-5 0-5.3 4.3-9.9 9.6-9.9zm-4.5 5.2c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.4 5.2 4.6 2.6 1 3.1.8 3.7.8.6-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.3-.2-.3 0-.5.1-.7.1-.1.3-.4.5-.6.1-.2.2-.3.3-.5.1-.2 0-.4 0-.6-.1-.2-.7-1.7-.9-2.3-.2-.6-.5-.5-.7-.5h-.6z"/></svg>
+        </span>
+      </a>
+      <a class="card-u" href="https://wa.me/5561994493368?text=Ol%C3%A1%21%20Gostaria%20de%20agendar%20uma%20coleta%20infantil%20no%20Fleming%20Kids.%20Pode%20me%20ajudar%3F" target="_blank" rel="noopener" style="--c:#FF8FB1">
+        <span class="mon-wrap"><svg class="mon" viewBox="0 0 40 44" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6 20 Q6 6 20 6 Q34 6 34 20 L34 34 Q34 40 28 40 L27 44 L24 40 L16 40 L13 44 L12 40 Q6 40 6 34 Z" fill="#FF8FB1"/>
+      <circle cx="14" cy="17" r="6" fill="#fff"/><circle cx="14" cy="18" r="3" fill="#2b2b2b"/><circle cx="26" cy="17" r="6" fill="#fff"/><circle cx="26" cy="18" r="3" fill="#2b2b2b"/>
+      <path d="M14 30 Q20 35 26 30" stroke="#2b2b2b" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+      <circle cx="11" cy="26" r="2.5" fill="#fff" opacity=".35"/>
+    </svg></span>
+        <span class="u-info">
+          <span class="u-nome">Céu Azul</span>
+          <span class="u-num">(61) 9 9449-3368</span>
+        </span>
+        <span class="u-go">
+          <svg viewBox="0 0 32 32" width="26" height="26"><path fill="#fff" d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.6 6L4 29l8.2-1.6c1.7.9 3.7 1.4 5.6 1.4C24.6 28.8 30 23.4 30 16.8 30 9.9 24.6 4.5 18 4.5 17.3 4.5 16 3 16 3zm.2 3.5c5.3 0 9.6 4.3 9.6 9.6s-4.3 9.6-9.6 9.6c-1.7 0-3.4-.5-4.9-1.3l-.4-.2-3.5.7.7-3.4-.2-.4c-.9-1.5-1.4-3.2-1.4-5 0-5.3 4.3-9.9 9.6-9.9zm-4.5 5.2c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.4 5.2 4.6 2.6 1 3.1.8 3.7.8.6-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.3-.2-.3 0-.5.1-.7.1-.1.3-.4.5-.6.1-.2.2-.3.3-.5.1-.2 0-.4 0-.6-.1-.2-.7-1.7-.9-2.3-.2-.6-.5-.5-.7-.5h-.6z"/></svg>
+        </span>
+      </a>
+    </nav>
+
+    <div class="rodape">
+      <div class="dica">💜 Atendimento acolhedor para toda a criançada</div>
+      <div class="marca">Laboratório <b>Fleming</b> · Fleming Kids</div>
+    </div>
+  </main>
+</body>
+</html>
